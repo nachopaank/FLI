@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{subcaption}
+\usepackage[spanish]{babel}
+\usepackage{paralist}
+\usepackage[lowtilde]{url}
+\usepackage{fixltx2e}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{auto-pst-pdf}
+\usepackage{pst-all}
+\usepackage{pstricks-add}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\begin{document}
+
+\title{Entrega 1: Lema de Iteración De Los Lenguajes Regulares}
+\author{Ignacio de la Cruz Crespo}
+\maketitle
+
+
+%%Ejercicio 1
+\section{Demuestra si es regular o no:\\ $L1=\{w1^n|w\in\{0,1\}^*,n\geqslant0,|w|=n\}$}
+\subsection{Razonamiento informal}
+Como debe haber el mismo numero de caracteres de $w$ que de "1" o de un segundo w sugiere que no sea regular puesto que no saber la longitud de la cadena conforme se va formando
+\subsection{Razonamiento formal}
+Voy a demostrar que no es un lenguaje regular asegurando que no cumple la propiedad dada por el lema de iteración\\
+$\forall n \geq 1$\\
+$\exists x \in L1$ con $|x| \geq n$\\
+Escojo la cadena $x = ww$ (Como $|w|=n$ la longitud es $2n$)\\
+$\forall$ u,v,w $\in \sum^*:\ $x=uvw $\wedge\ 1 \leq |v| \leq |uv| \leq n$\\
+\begin{itemize}
+\item$1 \leq j \leq n $
+\item$u = w^{n-j}$
+\item$v = w^j$
+\item$w = w^n$
+\end{itemize}
+$\exists$ i $\geq$ 0 : $uv^iw$ $\notin$ L\\
+Para $i = 0$ tenemos la cadena $x = w^{n-j}w^n$ y como $j > 1$ la longitud de la primera w no es igual a la segunda y por tanto no es una cadena dentro del lenguaje y por tanto no es regular
+%Ejercicio 2
+\section{Demuestra si es regular o no:\\ $L2=\{w1^n|w\in\{0,1\}^*,n\geqslant0\}$}
+\subsection{Razonamiento informal}
+Sin la implicacion de que la longitud debe ser de un tamaño especifico es trivial ver que existe una ER para este lenguaje y por tanto es regular
+\subsection{Razonamiento formal}
+$ ER = \{0,1\}^*$
+%Ejercicio 3
+\section{Demuestra si es regular o no:\\ $L3:\{xyx^R|x,y\in\{0,1\}^*\} $}
+\subsection{Razonamiento informal}
+Debe haber el un numero de caracteres de x igual al de $x^R$ al no haber memoria esto sugiere que pueda no se regular
+\subsection{Razonamiento formal}
+Voy a demostrar que no es un lenguaje regular asegurando que no cumple la propiedad dada por el lema de iteración a $x^R$ la voy a llamar $z$\\
+$\forall n \geq 1$\\
+$\exists x \in L1$ con $|x| \geq n$\\
+Escojo la cadena $q = x^nyz^n$\\
+$\forall$ u,v,w $\in \sum^*:\ $x=uvw $\wedge\ 1 \leq |v| \leq |uv| \leq n$\\
+\begin{itemize}
+\item$1 \leq j \leq n $
+\item$u = x^{n-j}$
+\item$v = x^j$
+\item$w = yx^n$
+\end{itemize}
+$\exists$ i $\geq$ 0 : $uv^iw$ $\notin$ L\\
+Para $i = 0$ tenemos la cadena $x =x^{n-j}yx^n$ y como $j > 1$ la longitud de x no es igual a z y por tanto no es una cadena dentro del lenguaje y por tanto no es regular
+%Ejercicio 4
+\section{Demuestra si es regular o no:\\ $L4: \{w\in\{a,b\}^*|$w no tiene a aa ni a aba como subcadenas\}}
+\subsection{Razonamiento informal}
+Supongo que es un lenguaje regular porque el planteamiento recuerda a ejercicios de construccion de AF o ER
+\subsection{Razonamiento formal}
+Es un lenguaje regular debido a que esta incluido en la siguiente ER\\
+\begin{itemize}
+\item$(a?b^*)|(b^*a?)(b|bba)^*$\\
+\end{itemize}
+\section{Hoja 3: 7.2 (reducción al absurdo)}
+Voy a demostrar que no es un lenguaje regular asegurando que no cumple la propiedad dada por el lema de iteración
+$\forall n \geq 1$
+$\exists x \in L1$ con $|x| \geq n$\\
+Escojo la cadena $x = 0^n1^12^{n-1}$ \\
+
+$\forall$ u,v,w $\in \sum^*:\ $x=uvw $\wedge\ 1 \leq |v| \leq |uv| \leq n$\\
+$1 \leq j \leq n $
+\begin{itemize}
+\item$u = 0^{n-j}$
+\item$v = 0^j$
+\item$w = 1^12^{n-j-1}$
+\end{itemize}
+$\exists$ i $\geq$ 2 : $uv^iw$ $\notin$ L\\
+Para $i = 2$ tenemos la cadena $x = 0^{n-j}0^{2j}12^{n-j-1}$ y como $n-j-2j = n -3j \neq n-j-1$ lo cual es una equivalencia que deberia cumplirse, por tanto no cumple la propiedad que asegura el LI y por tanto no es un lenguaje regular
+\section{Hoja 3: 11.4(contrajemplo o demostración, dependiendo de si es falsa o cierta la afirmación)}
+Por las propiedades de los lenguajes regulares sabemos que REG es efectivamente cerrada para la complementacion $(L \exists REG \xrightarrow{} \overline{L} \exists REG)$\\
+
+Tambien sabemos que el complementario del complementario es el mismo L por lo tanto $(L \exists REG \Longleftrightarrow{} \overline{L} \exists REG)$\\
+
+Caben dos posibilidades respecto al complementario de un lenguaje no regular, que este sea regular o no lo sea, por la implicacion $(L \exists NOREG \xrightarrow{} \overline{L} \exists REG)$\\ 
+
+Es imposible puesto que entra en conflicto con $(L \exists REG \Longleftrightarrow{} \overline{L} \exists REG)$\\
+Por lo que la unica posibilidad que queda es que su complementario se NOREG y por tanto la afirmacion es cierta
+\section{Hoja 3: 11.5(contrajemplo o demostración, dependiendo de si es falsa o cierta la afirmación)}
+
+Sabemos que la union de dos lenguajes regulares resulta en otro regular $L1(REG) \cup L2(REG) = L3(REG)$ por lo que ademas $L1(REG) = L2(REG) \cup L3(REG)$\\
+Suponiendo que la hipotesis $(L1(REG) \cup L2(NOREG) = L3(NOREG))$ es cierta, tambien se deberia cumplir que $(L1(REG) = L2(NOREG) \cup L3(NOREG))$, sin embargo esto es absurdo ya que la union de dos lenguajes no regulares no pueden resultar en uno regular, siendo la afirmacion falsa
+
+
+\end{document}
